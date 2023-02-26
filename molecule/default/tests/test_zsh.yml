@@ -1,0 +1,25 @@
+---
+package:
+  zsh:
+    installed: true
+file:
+  {{ zsh_config_path }}:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file
+  /root/.oh-my-zsh/oh-my-zsh.sh:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file
+command:
+  zsh:
+    exit-status: 0
+    exec: "zsh --version"
+user:
+  root:
+    exists: true
+    shell: /usr/bin/zsh

@@ -1,1 +1,6 @@
 ---
+zsh_theme: "risto"
+
+zsh_update_mode: "auto"
+
+zsh_update_frequency: 60

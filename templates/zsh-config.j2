@@ -1,0 +1,29 @@
+export ZSH=$HOME/.oh-my-zsh
+export LANG={{ zsh_locale }}
+export LC_ALL={{ zsh_locale }}
+
+ZSH_THEME="{{ zsh_theme }}"
+
+# Preferred editor for local and remote sessions
+EDITOR='nano'
+
+zstyle ':omz:update' mode {{ zsh_update_mode }}
+zstyle ':omz:update' frequency {{ zsh_update_frequency }}
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
+source $ZSH/oh-my-zsh.sh
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+DISABLE_MAGIC_FUNCTIONS="true"
+
+{% if ansible_os_family == "RedHat" %}
+alias upd="sudo yum upgrade -y && sudo yum autoremove -y && sudo yum clean all -y && sudo rm -rfd /var/cache/yum"
+{% endif %}
+
+{% if ansible_os_family == "Debian" %}
+alias upd="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y && sudo apt clean -y"
+alias mail="cat /var/spool/mail/root"
+{% endif %}
+
+alias n="nano"
+alias l="ls -lap --group-directories-first"
+alias c="clear"

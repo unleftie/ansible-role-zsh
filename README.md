@@ -1,7 +1,7 @@
-# Role for ??? setup
+# Role for Zsh setup
 
-[![Ansible CI](https://github.com/???/???/actions/workflows/ansible-ci.yml/badge.svg)](https://github.com/???/???/actions/workflows/ansible-ci.yml)
-[![Checkmarx KICS](https://github.com/???/???/actions/workflows/checkmarx-kics.yml/badge.svg)](https://github.com/???/???/actions/workflows/checkmarx-kics.yml)
+[![Ansible CI](https://github.com/unleftie/ansible-role-zsh/actions/workflows/ansible-ci.yml/badge.svg)](https://github.com/unleftie/ansible-role-zsh/actions/workflows/ansible-ci.yml)
+[![Checkmarx KICS](https://github.com/unleftie/ansible-role-zsh/actions/workflows/checkmarx-kics.yml/badge.svg)](https://github.com/unleftie/ansible-role-zsh/actions/workflows/checkmarx-kics.yml)
 
 ## Compatibility
 
@@ -17,10 +17,6 @@
 - [Molecule](https://molecule.readthedocs.io/en/latest/installation.html) (v4.0.4+) (for local testing)
 - [Docker](https://docs.docker.com/get-docker/) (for local testing)
 
-## Role dependencies
-
-- ???
-
 ## Local Testing
 
 ```sh
@@ -30,6 +26,8 @@ molecule test
 ## Installation
 
 > Upgradability notice: When upgrading from old version of this role, be aware that some files may be lost.
+
+To deploy the Zsh on hosts, add the Datadog role to your playbook. Below are some sample playbooks to assist you with using the Zsh Ansible role.
 
 ```yml
 - name: Sample 1
@@ -45,8 +43,24 @@ molecule test
       when: ansible_os_family == "Debian"
   tasks:
     - include_role:
-        name: "???"
+        name: "zsh"
 ```
+
+## Variables
+
+| Variable               | Description                                | Values                         |
+| ---------------------- | ------------------------------------------ | ------------------------------ |
+| `zsh_theme`            | Theme name                                 |
+| `zsh_update_mode`      | Update mode                                | "disabled", "auto", "reminder" |
+| `zsh_update_frequency` | Update frequency                           | 0-x (days)                     |
+| `zsh_locale`           | System locale value                        |
+| `zsh_config_path`      | Path to place config file for user account |
+
+## Repositories
+
+| #                 | Default repository                 |
+| ----------------- | ---------------------------------- |
+| zsh_installer_url | https://github.com/ohmyzsh/ohmyzsh |
 
 ## 📝 License
 

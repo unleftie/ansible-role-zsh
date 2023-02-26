@@ -1,1 +1,66 @@
 ---
+- name: Check if config file exists
+  stat:
+    path: "{{ zsh_config_path }}"
+  register: _zsh_config_file_check
+
+- name: Ensure dependencies are installed
+  package:
+    state: present
+    name:
+      - zsh
+      - git
+      - curl
+
+- name: Delete old version
+  file:
+    path: "~/.oh-my-zsh"
+    state: absent
+
+- name: Execute the installer
+  shell: sh -c "$(curl -fsSL {{ zsh_installer_url }})" "" --unattended --keep-zshrc
+  changed_when: false
+
+- name: Download zsh-syntax-highlighting plugin
+  git:
+    repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
+    dest: "~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    version: master
+    clone: true
+
+- name: Download zsh-autosuggestions plugin
+  git:
+    repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
+    dest: "~/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    version: master
+    clone: true
+
+- name: Fix completions ownership
+  file:
+    path: "~/.oh-my-zsh/cache/completions"
+    state: directory
+    owner: "root"
+    group: "root"
+    mode: "0755"
+
+- name: Change shell
+  user:
+    name: root
+    shell: /usr/bin/zsh
+
+- name: Create zsh-config using template
+  template:
+    src: "zsh-config.j2"
+    dest: "{{ zsh_config_path }}"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  when: not _zsh_config_file_check.stat.exists
+
+- name: Set default umask value
+  lineinfile:
+    path: "/etc/zsh/zshenv"
+    line: "umask {{ os_env_umaskss | default('027', true) }}"
+    state: present
+    mode: "0644"
+    create: true
