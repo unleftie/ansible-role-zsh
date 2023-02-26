@@ -25,9 +25,9 @@ scenario:
   test_sequence:
     - cleanup
     - destroy
-    - prepare
     - syntax
     - create
+    - prepare
     - converge
     - verify
     - converge
