@@ -20,6 +20,8 @@
 ## Local Testing
 
 ```sh
+git clone https://github.com/unleftie/ansible-role-zsh.git
+cd ansible-role-zsh/
 molecule test
 ```
 
