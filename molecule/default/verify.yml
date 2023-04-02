@@ -20,34 +20,30 @@
         dir: "../../vars"
         extensions: ["yml"]
 
-    - block:
-        - name: Get latest Goss release (with authorization)
-          uri:
-            url: "https://api.github.com/repos/aelsabbahy/goss/releases/latest"
-            method: GET
-            return_content: true
-            status_code: 200
-            body_format: raw
-            headers:
-              Authorization: "Bearer {{ lookup('env', 'GHA_TOKEN') }}"
+    - name: Get latest Goss release
+      block:
+        - name: Get latest release (with authorization)
+          community.general.github_release:
+            user: aelsabbahy
+            repo: goss
+            token: "{{ lookup('env', 'GHA_TOKEN') }}"
+            action: latest_release
           register: _latest_release
           until: _latest_release.status == 200
           retries: 5
           when: lookup('env', 'GHA_TOKEN')
 
-        - name: Get latest Goss release
-          uri:
-            url: "https://api.github.com/repos/aelsabbahy/goss/releases/latest"
-            method: GET
-            return_content: true
-            status_code: 200
-            body_format: raw
+        - name: Get latest release (without authorization)
+          community.general.github_release:
+            user: aelsabbahy
+            repo: goss
+            action: latest_release
           register: _latest_release
           until: _latest_release.status == 200
           retries: 5
           when: not lookup('env', 'GHA_TOKEN')
 
-        - name: "Set Goss version to {{ _latest_release.value.0.tag_name }}"
+        - name: "Set version to {{ _latest_release.value.0.tag_name }}"
           set_fact:
             goss_version: "v{{ _latest_release.value.0.tag_name }}"
           loop: '{{ lookup("dict", _latest_release) }}'
