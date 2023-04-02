@@ -29,7 +29,7 @@
             token: "{{ lookup('env', 'GHA_TOKEN') }}"
             action: latest_release
           register: _latest_release
-          until: _latest_release.status == 200
+          until: _latest_release is succeeded
           retries: 5
           when: lookup('env', 'GHA_TOKEN')
 
@@ -39,14 +39,13 @@
             repo: goss
             action: latest_release
           register: _latest_release
-          until: _latest_release.status == 200
+          until: _latest_release is succeeded
           retries: 5
           when: not lookup('env', 'GHA_TOKEN')
 
-        - name: "Set version to {{ _latest_release.value.0.tag_name }}"
+        - name: "Set version to {{ _latest_release }}"
           set_fact:
-            goss_version: "v{{ _latest_release.value.0.tag_name }}"
-          loop: '{{ lookup("dict", _latest_release) }}'
+            goss_version: "v{{ _latest_release }}"
       when: goss_version == "latest"
       run_once: true
 
@@ -63,7 +62,7 @@
       retries: 5
       when: lookup('env', 'GHA_TOKEN')
 
-    - name: Download and install Goss
+    - name: Download and install Goss (without authorization)
       get_url:
         url: "{{ goss_url }}"
         dest: "{{ goss_dst }}"
