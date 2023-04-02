@@ -33,6 +33,8 @@
             token: "{{ lookup('env', 'GHA_TOKEN') }}"
             action: latest_release
           register: _latest_release
+          until: latest_release is succeeded
+          retries: 5
 
         - name: "Set version tag to {{ _latest_release.tag }}"
           set_fact:
