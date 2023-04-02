@@ -3,10 +3,12 @@
   hosts: all
   become: true
   vars:
+    github_user: "aelsabbahy"
+    github_repo: "goss"
     goss_version: "latest"
     goss_arch: "amd64"
     goss_dst: "/usr/bin/goss"
-    goss_url: "https://github.com/aelsabbahy/goss/releases/download/{{ goss_version }}/goss-linux-{{ goss_arch }}"
+    goss_url: "https://github.com/{{ github_user }}/{{ github_repo }}/releases/download/{{ goss_version }}/goss-linux-{{ goss_arch }}"
     goss_test_directory: "/tmp"
     goss_format: "tap"
   tasks:
@@ -28,8 +30,8 @@
       block:
         - name: Get latest release
           community.general.github_release:
-            user: aelsabbahy
-            repo: goss
+            user: "{{ github_user }}"
+            repo: "{{ github_repo }}"
             token: "{{ lookup('env', 'GHA_TOKEN') }}"
             action: latest_release
           register: _latest_release
