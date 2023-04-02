@@ -45,7 +45,7 @@ To deploy the Zsh on hosts, add the Datadog role to your playbook. Below are som
       when: ansible_os_family == "Debian"
   tasks:
     - include_role:
-        name: "zsh"
+        name: "ansible-role-zsh"
 ```
 
 ## Variables
