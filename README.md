@@ -7,14 +7,14 @@
 
 | Platform   | Version |
 | ---------- | ------- |
-| debian     | 11      |
+| debian     | 12      |
 | el (rocky) | 9       |
 | ubuntu     | 22.04   |
 
 ## Dependencies
 
 - [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) (v2.14+)
-- [Molecule](https://molecule.readthedocs.io/en/latest/installation.html) (v4.0.4+) (for local testing)
+- [Molecule](https://molecule.readthedocs.io/en/latest/installation.html) + (v4.0.4+) + [docker plugin](https://github.com/ansible-community/molecule-plugins) (for local testing)
 - [Docker](https://docs.docker.com/get-docker/) (for local testing)
 
 ## Local Testing
@@ -22,6 +22,7 @@
 ```sh
 git clone https://github.com/unleftie/ansible-role-zsh.git
 cd ansible-role-zsh/
+ansible-galaxy collection install -r requirements.yml
 molecule test
 ```
 
