@@ -6,20 +6,20 @@ file:
   {{ zsh_config_path }}:
     exists: true
     mode: "0644"
-    owner: root
-    group: root
+    owner: {{ zsh_user }}
+    group: {{ zsh_user }}
     filetype: file
-  /root/.oh-my-zsh/oh-my-zsh.sh:
+  ~/.oh-my-zsh/oh-my-zsh.sh:
     exists: true
     mode: "0644"
-    owner: root
-    group: root
+    owner: {{ zsh_user }}
+    group: {{ zsh_user }}
     filetype: file
 command:
   zsh:
     exit-status: 0
     exec: "zsh --version"
 user:
-  root:
+  {{ zsh_user }}:
     exists: true
     shell: /usr/bin/zsh

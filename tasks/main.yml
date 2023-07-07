@@ -1,27 +1,40 @@
 ---
 - name: Check if config file exists
+  become: true
+  become_user: "{{ zsh_user }}"
   stat:
     path: "{{ zsh_config_path }}"
   register: _zsh_config_file_check
 
 - name: Ensure dependencies are installed
+  become: true
+  become_user: "root"
   package:
     state: present
     name:
       - zsh
       - git
       - curl
+  register: _progress_status
+  until: _progress_status is succeeded
+  retries: 5
 
 - name: Delete old version
+  become: true
+  become_user: "{{ zsh_user }}"
   file:
     path: "~/.oh-my-zsh"
     state: absent
 
 - name: Execute the installer
+  become: true
+  become_user: "{{ zsh_user }}"
   shell: sh -c "$(curl -fsSL {{ zsh_installer_url }})" "" --unattended --keep-zshrc
   changed_when: false
 
 - name: Download zsh-syntax-highlighting plugin
+  become: true
+  become_user: "{{ zsh_user }}"
   git:
     repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
     dest: "~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
@@ -29,6 +42,8 @@
     clone: true
 
 - name: Download zsh-autosuggestions plugin
+  become: true
+  become_user: "{{ zsh_user }}"
   git:
     repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
     dest: "~/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
@@ -36,28 +51,36 @@
     clone: true
 
 - name: Fix completions ownership
+  become: true
+  become_user: "{{ zsh_user }}"
   file:
     path: "~/.oh-my-zsh/cache/completions"
     state: directory
-    owner: "root"
-    group: "root"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user }}"
     mode: "0755"
 
 - name: Change shell
+  become: true
+  become_user: "root"
   user:
-    name: root
-    shell: /usr/bin/zsh
+    name: "{{ zsh_user }}"
+    shell: "/usr/bin/zsh"
 
 - name: Create zsh-config using template
+  become: true
+  become_user: "{{ zsh_user }}"
   template:
     src: "zsh-config.j2"
     dest: "{{ zsh_config_path }}"
-    owner: "root"
-    group: "root"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user }}"
     mode: "0644"
   when: not _zsh_config_file_check.stat.exists
 
 - name: Set default umask value
+  become: true
+  become_user: "root"
   lineinfile:
     path: "/etc/zsh/zshenv"
     line: "umask {{ os_env_umaskss | default('027', true) }}"

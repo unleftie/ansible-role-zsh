@@ -1,4 +1,6 @@
 ---
+zsh_user: "root"
+
 zsh_theme: "risto"
 
 zsh_update_mode: "auto"
