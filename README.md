@@ -1,7 +1,6 @@
 # Role for Zsh setup
 
-[![Ansible CI](https://github.com/unleftie/ansible-role-zsh/actions/workflows/ansible-ci.yml/badge.svg)](https://github.com/unleftie/ansible-role-zsh/actions/workflows/ansible-ci.yml)
-[![Checkmarx KICS](https://github.com/unleftie/ansible-role-zsh/actions/workflows/checkmarx-kics.yml/badge.svg)](https://github.com/unleftie/ansible-role-zsh/actions/workflows/checkmarx-kics.yml)
+[![CI](https://github.com/unleftie/ansible-role-zsh/actions/workflows/ci.yml/badge.svg)](https://github.com/unleftie/ansible-role-zsh/actions/workflows/ci.yml)
 
 ## Compatibility
 
@@ -22,7 +21,6 @@
 ```sh
 git clone https://github.com/unleftie/ansible-role-zsh.git
 cd ansible-role-zsh/
-ansible-galaxy collection install -r requirements.yml
 molecule test
 ```
 
