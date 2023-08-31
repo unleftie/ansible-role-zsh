@@ -6,9 +6,8 @@
     github_user: "aelsabbahy"
     github_repo: "goss"
     goss_version: "latest"
-    goss_arch: "amd64"
     goss_dst: "/usr/bin/goss"
-    goss_url: "https://github.com/{{ github_user }}/{{ github_repo }}/releases/download/{{ goss_version }}/goss-linux-{{ goss_arch }}"
+    goss_url: "https://github.com/{{ github_user }}/{{ github_repo }}/releases/download/{{ goss_version }}/goss-linux-{{ goss_arch.stdout }}"
     goss_test_directory: "/tmp"
     goss_format: "tap"
   tasks:
@@ -21,6 +20,11 @@
       include_vars:
         dir: "../../vars"
         extensions: ["yml"]
+
+    - name: Get architecture
+      shell: dpkg --print-architecture
+      register: goss_arch
+      when: ansible_os_family == "Debian"
 
     - name: Ensure dependencies are installed
       pip:
