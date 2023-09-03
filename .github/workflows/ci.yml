@@ -2,6 +2,10 @@ name: CI
 on:
   workflow_dispatch:
     inputs:
+      runScorecard:
+        description: Run Scorecard analysis
+        type: boolean
+        default: true
       runKics:
         description: Run KICS scan
         type: boolean
@@ -26,15 +30,52 @@ on:
 env:
   ACTIONS_REPOSITORY: "gha-templates"
 
+# Declare default permissions as read only.
+permissions: read-all
+
 jobs:
+  analysis:
+    name: Scorecard analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: |
+      inputs.runScorecard == true ||
+      github.event_name == 'push' ||
+      github.event_name == 'pull_request' ||
+      github.event_name == 'schedule'
+    permissions:
+      security-events: write # Needed to upload the results to code-scanning dashboard.
+      id-token: write # Needed to publish results and get a badge.
+      contents: read
+      actions: read
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@8ca2b8b2ece13480cda6dacd3511b49857a23c09 # v2.5.1
+        with:
+          egress-policy: audit
+
+      - name: Checkout
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+
+      - name: Checkout actions repository
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+        with:
+          repository: ${{ github.repository_owner }}/${{ env.ACTIONS_REPOSITORY }}
+          token: ${{ secrets.GHA_TOKEN }}
+          path: gha_templates
+          fetch-depth: 0
+
+      - name: Run Scorecard analysis
+        uses: ./gha_templates/scorecard
+
   scan:
     name: Checkmarx KICS
     runs-on: ubuntu-latest
     timeout-minutes: 5
     if: |
-      inputs.runKics == true || 
-      github.event_name == 'push' || 
-      github.event_name == 'pull_request' || 
+      inputs.runKics == true ||
+      github.event_name == 'push' ||
+      github.event_name == 'pull_request' ||
       github.event_name == 'schedule'
     permissions:
       contents: read # for actions/checkout to fetch code
@@ -70,9 +111,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     if: |
-      inputs.runLint == true || 
-      github.event_name == 'push' || 
-      github.event_name == 'pull_request' || 
+      inputs.runLint == true ||
+      github.event_name == 'push' ||
+      github.event_name == 'pull_request' ||
       github.event_name == 'schedule'
     steps:
       - name: Harden Runner
@@ -100,9 +141,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     if: |
-      inputs.runMolecule == true || 
-      github.event_name == 'push' || 
-      github.event_name == 'pull_request' || 
+      inputs.runMolecule == true ||
+      github.event_name == 'push' ||
+      github.event_name == 'pull_request' ||
       github.event_name == 'schedule'
     strategy:
       matrix:
