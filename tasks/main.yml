@@ -33,24 +33,6 @@
   shell: sh -c "$(curl -fsSL {{ zsh_installer_url }})" "" --unattended --keep-zshrc
   changed_when: false
 
-- name: Download zsh-syntax-highlighting plugin
-  become: true
-  become_user: "{{ zsh_user }}"
-  git:
-    repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
-    dest: "~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
-    version: master
-    clone: true
-
-- name: Download zsh-autosuggestions plugin
-  become: true
-  become_user: "{{ zsh_user }}"
-  git:
-    repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
-    dest: "~/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
-    version: master
-    clone: true
-
 - name: Fix completions ownership
   become: true
   become_user: "{{ zsh_user }}"
@@ -68,6 +50,11 @@
     name: "{{ zsh_user }}"
     shell: "/usr/bin/zsh"
 
+- include_tasks: plugins.yml
+
+- include_tasks: powerlevel10k.yml
+  when: zsh_set_powerlevel10k_theme | bool
+
 - name: Create zsh-config using template
   become: true
   become_user: "{{ zsh_user }}"
@@ -77,7 +64,8 @@
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user }}"
     mode: "0644"
-  when: not _zsh_config_file_check.stat.exists
+  when: not _zsh_config_file_check.stat.exists or
+    zsh_force_replace_zsh_config | bool
 
 - name: Set default umask value
   become: true

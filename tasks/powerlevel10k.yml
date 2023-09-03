@@ -1,0 +1,27 @@
+- name: Check if powerlevel10k config file exists
+  become: true
+  become_user: "{{ zsh_user }}"
+  stat:
+    path: "{{ p10k_config_path }}"
+  register: _p10k_config_file_check
+
+- name: Download powerlevel10k theme
+  become: true
+  become_user: "{{ zsh_user }}"
+  git:
+    repo: "https://github.com/romkatv/powerlevel10k.git"
+    dest: "~/.oh-my-zsh/custom/themes/powerlevel10k"
+    clone: true
+    depth: 1
+
+- name: Create powerlevel10k config
+  become: true
+  become_user: "{{ zsh_user }}"
+  copy:
+    src: "p10k.zsh"
+    dest: "{{ p10k_config_path }}"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user }}"
+    mode: "0644"
+  when: not _p10k_config_file_check.stat.exists or
+    zsh_force_replace_powerlevel10k_config | bool

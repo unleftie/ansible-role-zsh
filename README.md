@@ -56,17 +56,11 @@ To deploy the Zsh on hosts, add the Datadog role to your playbook. Below are som
 
 | Variable               | Description                                | Values                         |
 | ---------------------- | ------------------------------------------ | ------------------------------ |
-| `zsh_theme`            | Theme name                                 |
+| `zsh_default_theme`    | Default theme name                         |
 | `zsh_update_mode`      | Update mode                                | "disabled", "auto", "reminder" |
 | `zsh_update_frequency` | Update frequency                           | 0-x (days)                     |
 | `zsh_locale`           | System locale value                        |
 | `zsh_config_path`      | Path to place config file for user account |
-
-## Repositories
-
-| #                 | Default repository                 |
-| ----------------- | ---------------------------------- |
-| zsh_installer_url | https://github.com/ohmyzsh/ohmyzsh |
 
 ## 📝 License
 

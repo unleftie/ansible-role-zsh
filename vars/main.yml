@@ -1,5 +1,6 @@
 ---
 zsh_config_path: "~/.zshrc"
+p10k_config_path: "~/.p10k.zsh"
 
 zsh_locale: "en_US.UTF-8"
 
