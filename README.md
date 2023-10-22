@@ -5,11 +5,9 @@
 
 ## Compatibility
 
-| Platform   | Version |
-| ---------- | ------- |
-| debian     | 12      |
-| el (rocky) | 9       |
-| ubuntu     | 22.04   |
+| Platform | Version |
+| -------- | ------- |
+| debian   | 12      |
 
 ## Dependencies
 
