@@ -108,8 +108,6 @@ jobs:
     strategy:
       matrix:
         distro:
-          - rockylinux9
-          - ubuntu2204
           - debian12
 
     steps:
