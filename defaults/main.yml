@@ -1,7 +1,7 @@
 ---
 zsh_user: "root"
 
-zsh_set_powerlevel10k_theme: false
+zsh_set_powerlevel10k_theme: true
 zsh_default_theme: "risto"
 
 zsh_update_mode: "auto"
