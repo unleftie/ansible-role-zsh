@@ -3,7 +3,7 @@ dependencies: []
 
 galaxy_info:
   role_name: zsh
-  author: unleftie
+  author: denysrondaliev
   description: Role for Zsh setup
   company: ""
   license: "license (MIT)"

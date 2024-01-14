@@ -1,7 +1,7 @@
 # Role for Zsh setup
 
-[![CI](https://github.com/unleftie/ansible-role-zsh/actions/workflows/ci.yml/badge.svg)](https://github.com/unleftie/ansible-role-zsh/actions/workflows/ci.yml)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/unleftie/ansible-role-zsh/badge)](https://securityscorecards.dev/viewer/?uri=github.com/unleftie/ansible-role-zsh)
+[![CI](https://github.com/denysrondaliev/ansible-role-zsh/actions/workflows/ci.yml/badge.svg)](https://github.com/denysrondaliev/ansible-role-zsh/actions/workflows/ci.yml)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/denysrondaliev/ansible-role-zsh/badge)](https://securityscorecards.dev/viewer/?uri=github.com/denysrondaliev/ansible-role-zsh)
 
 ## Compatibility
 
@@ -18,7 +18,7 @@
 ## Local Testing
 
 ```sh
-git clone https://github.com/unleftie/ansible-role-zsh.git
+git clone https://github.com/denysrondaliev/ansible-role-zsh.git
 cd ansible-role-zsh/
 molecule test
 ```
