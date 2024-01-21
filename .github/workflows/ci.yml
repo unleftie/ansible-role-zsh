@@ -22,7 +22,7 @@ on:
     branches: ["master", "main"]
 
 env:
-  KICS_SCAN_PATH: ""
+  KICS_SCAN_PATH: "./"
 
 # Declare default permissions as read only.
 permissions: read-all
