@@ -86,7 +86,7 @@ jobs:
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
       - name: Run Ansible Lint
-        uses: unleftie/ansible-lint-action@78dd69353a7ceaaca916be0040afa714abe74fc3 # v1.0.2
+        uses: unleftie/ansible-lint-action@5e48b42dbdaef17c54c526b52776426f5819a818 # v1.0.3
 
   molecule:
     name: Ansible Molecule
@@ -113,7 +113,7 @@ jobs:
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
       - name: Run Ansible Molecule
-        uses: unleftie/ansible-molecule-action@bf739d9881866e1e00e68a24bac3dee192b5ec0f # v1.6.2
+        uses: unleftie/ansible-molecule-action@22635a495dd572eb6cf70791f1af9a75979caf7d # v1.6.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           role_name: ${{ github.event.repository.name }}
