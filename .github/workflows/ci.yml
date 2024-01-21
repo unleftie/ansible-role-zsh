@@ -129,7 +129,7 @@ jobs:
           fetch-depth: 0
 
       - name: Run Ansible Molecule
-        uses: ./gha_templates/ansible-molecule
+        uses: unleftie/ansible-molecule-action@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           role_name: ${{ github.event.repository.name }}
