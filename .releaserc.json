@@ -1,9 +1,7 @@
 {
   "branches": ["main", "master"],
-  "dryRun": false,
+  "ci": true,
   "plugins": [
-    ["@semantic-release/changelog"],
-    ["@semantic-release/git"],
     [
       "@semantic-release/commit-analyzer",
       {
