@@ -144,6 +144,11 @@ jobs:
         with:
           extra_plugins: conventional-changelog-conventionalcommits
           semantic_version: 18.0.0
+          branches: |
+            [
+              'master',
+              'main',
+            ]
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
