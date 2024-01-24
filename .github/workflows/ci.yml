@@ -129,6 +129,8 @@ jobs:
     permissions:
       packages: write
       contents: write
+      issues: write
+      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
@@ -141,6 +143,8 @@ jobs:
         id: semantic
         with:
           extra_plugins: conventional-changelog-conventionalcommits
+          dry_run: false
+          ci: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
