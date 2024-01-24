@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.0.1](https://github.com/unleftie/ansible-role-zsh/compare/v1.0.0...v1.0.1) (2024-01-24)
+
+
+### Bug Fixes
+
+* release action ([bbfbfd6](https://github.com/unleftie/ansible-role-zsh/commit/bbfbfd6a27c5cd87a1b27a4a9fb942ca77c2c635))
+
 ## 1.0.0 (2024-01-24)
 
 
