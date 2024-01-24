@@ -140,6 +140,7 @@ jobs:
 
       - name: Release
         uses: cycjimmy/semantic-release-action@v3
+        id: semantic
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
