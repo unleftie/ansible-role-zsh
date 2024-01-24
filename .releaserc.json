@@ -1,14 +1,11 @@
 {
   "branches": ["main", "master"],
-  "ci": true,
+  "ci": false,
   "plugins": [
-    ["@semantic-release/changelog"],
-    ["@semantic-release/git"],
     [
       "@semantic-release/commit-analyzer",
       {
-        "preset": "conventionalcommits",
-        "presetConfig": "conventional-changelog-conventionalcommits"
+        "preset": "conventionalcommits"
       }
     ],
     [
