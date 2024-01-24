@@ -140,9 +140,7 @@ jobs:
 
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v4
-        id: semantic
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          semantic_version: 18.0.0
           extra_plugins: conventional-changelog-conventionalcommits@4.6.3
