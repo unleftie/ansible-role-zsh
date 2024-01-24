@@ -143,4 +143,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          extra_plugins: conventional-changelog-conventionalcommits@7.0.2
+          extra_plugins: conventional-changelog-conventionalcommits@6.1.0
