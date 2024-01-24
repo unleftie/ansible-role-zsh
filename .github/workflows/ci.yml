@@ -143,8 +143,7 @@ jobs:
         id: semantic
         with:
           extra_plugins: conventional-changelog-conventionalcommits
-          dry_run: false
-          ci: true
+          semantic_version: 18.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
