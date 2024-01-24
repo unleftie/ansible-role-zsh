@@ -4,7 +4,13 @@
   "plugins": [
     ["@semantic-release/changelog"],
     ["@semantic-release/git"],
-    ["conventional-changelog-conventionalcommits"],
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": "conventional-changelog-conventionalcommits"
+      }
+    ],
     [
       "@semantic-release/commit-analyzer",
       {
