@@ -21,8 +21,6 @@
         "labels": false,
         "releasedLabels": false
       }
-    ],
-    ["@semantic-release/changelog"],
-    ["@semantic-release/git"]
+    ]
   ]
 }
