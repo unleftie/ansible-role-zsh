@@ -1,6 +1,6 @@
 {
   "branches": ["main", "master"],
-  "ci": false,
+  "ci": true,
   "plugins": [
     ["@semantic-release/changelog"],
     ["@semantic-release/git"],
