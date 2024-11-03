@@ -63,7 +63,7 @@
     dest: "{{ zsh_config_path }}"
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user }}"
-    mode: "0644"
+    mode: "0640"
   when: not _zsh_config_file_check.stat.exists or
     zsh_force_replace_zsh_config | bool
 
@@ -74,5 +74,5 @@
     path: "/etc/zsh/zshenv"
     line: "umask {{ os_env_umaskss | default('027', true) }}"
     state: present
-    mode: "0644"
+    mode: "0640"
     create: true

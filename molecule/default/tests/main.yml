@@ -5,13 +5,13 @@ package:
 file:
   {{ zsh_config_path }}:
     exists: true
-    mode: "0644"
+    mode: "0640"
     owner: {{ zsh_user }}
     group: {{ zsh_user }}
     filetype: file
   ~/.oh-my-zsh/oh-my-zsh.sh:
     exists: true
-    mode: "0644"
+    mode: "0640"
     owner: {{ zsh_user }}
     group: {{ zsh_user }}
     filetype: file
