@@ -11,7 +11,7 @@ file:
     filetype: file
   ~/.oh-my-zsh/oh-my-zsh.sh:
     exists: true
-    mode: "0640"
+    mode: "0644"
     owner: {{ zsh_user }}
     group: {{ zsh_user }}
     filetype: file
