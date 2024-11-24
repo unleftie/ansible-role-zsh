@@ -1,5 +1,5 @@
 ---
-zsh_user: "root"
+zsh_user: "admin"
 
 zsh_set_powerlevel10k_theme: true
 zsh_default_theme: "risto"

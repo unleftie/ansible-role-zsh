@@ -1,6 +1,6 @@
 ---
-zsh_config_path: "~/.zshrc"
-p10k_config_path: "~/.p10k.zsh"
+zsh_config_path: "/home/{{ zsh_user }}/.zshrc"
+p10k_config_path: "/home/{{ zsh_user }}/.p10k.zsh"
 
 zsh_locale: "en_US.UTF-8"
 

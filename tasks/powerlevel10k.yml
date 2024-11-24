@@ -10,7 +10,7 @@
   become_user: "{{ zsh_user }}"
   git:
     repo: "https://github.com/romkatv/powerlevel10k.git"
-    dest: "~/.oh-my-zsh/custom/themes/powerlevel10k"
+    dest: "/home/{{ zsh_user }}/.oh-my-zsh/custom/themes/powerlevel10k"
     version: "master"
     clone: true
     depth: 1

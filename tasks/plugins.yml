@@ -3,7 +3,7 @@
   become_user: "{{ zsh_user }}"
   git:
     repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git"
-    dest: "~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    dest: "/home/{{ zsh_user }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
     version: "master"
     clone: true
 
@@ -12,6 +12,6 @@
   become_user: "{{ zsh_user }}"
   git:
     repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
-    dest: "~/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    dest: "/home/{{ zsh_user }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
     version: "master"
     clone: true

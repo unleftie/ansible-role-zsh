@@ -9,7 +9,7 @@ file:
     owner: {{ zsh_user }}
     group: {{ zsh_user }}
     filetype: file
-  ~/.oh-my-zsh/oh-my-zsh.sh:
+  /home/{{ zsh_user }}/.oh-my-zsh/oh-my-zsh.sh:
     exists: true
     mode: "0644"
     owner: {{ zsh_user }}

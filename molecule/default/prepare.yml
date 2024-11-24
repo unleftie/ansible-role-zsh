@@ -2,6 +2,8 @@
 - name: Prepare
   hosts: all
   become: true
+  vars:
+    zsh_user: "admin"
   tasks:
     - name: Wait for automatic system updates
       shell: while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do sleep 1; done;
@@ -26,3 +28,13 @@
       until: _progress_status is succeeded
       delay: 5
       retries: 5
+
+    - name: Ensure user "{{ zsh_user }}" exists
+      user:
+        name: "{{ zsh_user }}"
+        password: "!" # disable password login, for sudo command root password will be used
+        create_home: true
+        shell: "/bin/bash"
+        update_password: "on_create"
+        state: present
+      no_log: true
