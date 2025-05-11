@@ -37,3 +37,6 @@ alias c="clear"
 {% if zsh_set_powerlevel10k_theme %}
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 {% endif %}
+
+# workaround for debian
+umask {{ zsh_umask }}

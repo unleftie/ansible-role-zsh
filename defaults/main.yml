@@ -10,3 +10,5 @@ zsh_update_frequency: 90
 
 zsh_force_replace_zsh_config: false
 zsh_force_replace_powerlevel10k_config: false
+
+zsh_umask: 022
