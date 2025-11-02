@@ -3,13 +3,13 @@ package:
   zsh:
     installed: true
 file:
-  {{ zsh_config_path }}:
+  {{ zsh_user_home }}/.zshrc:
     exists: true
     mode: "0640"
     owner: {{ zsh_user }}
     group: {{ zsh_user }}
     filetype: file
-  /home/{{ zsh_user }}/.oh-my-zsh/oh-my-zsh.sh:
+  {{ zsh_user_home }}/.oh-my-zsh/oh-my-zsh.sh:
     exists: true
     mode: "0644"
     owner: {{ zsh_user }}

@@ -28,6 +28,16 @@
         dir: "../../vars"
         extensions: ["yml", "yaml"]
 
+    - name: Get user home directory
+      become: true
+      getent:
+        database: passwd
+        key: "{{ zsh_user }}"
+
+    - name: Set user home directory fact
+      set_fact:
+        zsh_user_home: "{{ getent_passwd[zsh_user][4] }}"
+
     - name: Ensure dependencies are installed
       pip:
         name: github3.py

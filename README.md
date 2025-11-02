@@ -42,16 +42,6 @@ molecule test
         name: "ansible-role-zsh"
 ```
 
-## Variables
-
-| Variable               | Description                                | Values                         |
-| ---------------------- | ------------------------------------------ | ------------------------------ |
-| `zsh_default_theme`    | Default theme name                         |
-| `zsh_update_mode`      | Update mode                                | "disabled", "auto", "reminder" |
-| `zsh_update_frequency` | Update frequency                           | 0-x (days)                     |
-| `zsh_locale`           | System locale value                        |
-| `zsh_config_path`      | Path to place config file for user account |
-
 ## 📝 License
 
 This project is licensed under the [MIT](LICENSE).

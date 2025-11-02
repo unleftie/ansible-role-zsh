@@ -2,7 +2,7 @@
   become: true
   become_user: "{{ zsh_user }}"
   stat:
-    path: "{{ p10k_config_path }}"
+    path: "{{ zsh_user_home }}/.p10k.zsh"
   register: _p10k_config_file_check
 
 - name: Download powerlevel10k theme
@@ -10,7 +10,7 @@
   become_user: "{{ zsh_user }}"
   git:
     repo: "https://github.com/romkatv/powerlevel10k.git"
-    dest: "/home/{{ zsh_user }}/.oh-my-zsh/custom/themes/powerlevel10k"
+    dest: "{{ zsh_user_home }}/.oh-my-zsh/custom/themes/powerlevel10k"
     version: "master"
     clone: true
     depth: 1
@@ -20,7 +20,7 @@
   become_user: "{{ zsh_user }}"
   copy:
     src: "p10k.zsh"
-    dest: "{{ p10k_config_path }}"
+    dest: "{{ zsh_user_home }}/.p10k.zsh"
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user }}"
     mode: "0644"
