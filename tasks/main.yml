@@ -7,7 +7,7 @@
 
 - name: Set user home directory fact
   set_fact:
-    zsh_user_home: "{{ getent_passwd[zsh_user][4] }}"
+    zsh_user_home: "{{ ansible_facts['getent_passwd'][zsh_user][4] }}"
 
 - name: Check if config file exists
   become: true

@@ -4,6 +4,13 @@ export LC_ALL={{ zsh_locale }}
 export DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 {% if zsh_set_powerlevel10k_theme %}
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 ZSH_THEME="powerlevel10k/powerlevel10k"
 {% else %}
 ZSH_THEME="{{ zsh_default_theme }}"
@@ -21,11 +28,11 @@ source $ZSH/oh-my-zsh.sh
 # Uncomment the following line if pasting URLs and other text is messed up.
 DISABLE_MAGIC_FUNCTIONS="true"
 
-{% if ansible_os_family == "RedHat" %}
+{% if ansible_facts['os_family'] == "RedHat" %}
 alias upd="sudo yum upgrade -y && sudo yum autoremove -y && sudo yum clean all -y && sudo rm -rfd /var/cache/yum"
 {% endif %}
 
-{% if ansible_os_family == "Debian" %}
+{% if ansible_facts['os_family'] == "Debian" %}
 alias upd="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y && sudo apt clean -y"
 alias mail="cat /var/spool/mail/root"
 {% endif %}
@@ -37,6 +44,3 @@ alias c="clear"
 {% if zsh_set_powerlevel10k_theme %}
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 {% endif %}
-
-# workaround for debian
-umask {{ zsh_umask }}

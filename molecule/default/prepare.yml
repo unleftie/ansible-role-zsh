@@ -3,7 +3,7 @@
   hosts: all
   become: true
   vars:
-    zsh_user: "admin"
+    zsh_user: "ubuntu"
   tasks:
     - name: Wait for automatic system updates
       shell: while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do sleep 1; done;
@@ -18,7 +18,7 @@
       until: _progress_status is succeeded
       delay: 5
       retries: 5
-      when: ansible_os_family == "Debian"
+      when: ansible_facts['os_family'] == "Debian"
 
     - name: Ensure unnecessary dependencies are removed
       package:
@@ -29,6 +29,11 @@
       delay: 5
       retries: 5
 
+    - name: Get user home directory
+      getent:
+        database: passwd
+        key: "{{ zsh_user }}"
+
     - name: Ensure user "{{ zsh_user }}" exists
       user:
         name: "{{ zsh_user }}"
@@ -38,3 +43,10 @@
         update_password: "on_create"
         state: present
       no_log: true
+
+    # cached so the fact survives into the separate verify.yml run
+    - name: Set user home directory fact
+      set_fact:
+        zsh_user_home: "{{ ansible_facts['getent_passwd'][zsh_user][4] }}"
+        zsh_user: "{{ zsh_user }}"
+        cacheable: true

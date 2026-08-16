@@ -1,5 +1,5 @@
 ---
-zsh_user: "root"
+zsh_user: "ubuntu"
 
 zsh_set_powerlevel10k_theme: true
 zsh_default_theme: "risto"
@@ -10,5 +10,3 @@ zsh_update_frequency: 90
 
 zsh_force_replace_zsh_config: false
 zsh_force_replace_powerlevel10k_config: false
-
-zsh_umask: 022
